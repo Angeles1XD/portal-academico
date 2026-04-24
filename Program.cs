@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using PortalAcademico.Data;
+using PortalAcademico.Models; // 👈 IMPORTANTE para Curso
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,11 +21,27 @@ builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
-// 👇 CREAR / ACTUALIZAR BD AQUÍ (ANTES DE TODO)
+// =====================================
+// 👉 MIGRACIONES + SEED (MUY IMPORTANTE)
+// =====================================
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-    db.Database.Migrate(); // 👈 MEJOR QUE EnsureCreated
+
+    // Aplica migraciones
+    db.Database.Migrate();
+
+    // Datos iniciales (solo si está vacío)
+    if (!db.Cursos.Any())
+    {
+        db.Cursos.AddRange(
+            new Curso { Nombre = "Matemática", Creditos = 4 },
+            new Curso { Nombre = "Programación", Creditos = 5 },
+            new Curso { Nombre = "Base de Datos", Creditos = 3 }
+        );
+
+        db.SaveChanges();
+    }
 }
 
 // Configuración
@@ -34,7 +51,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-// ⚠️ OPCIONAL (Render no usa HTTPS interno)
+// ⚠️ Render no usa HTTPS interno
 // app.UseHttpsRedirection();
 
 app.UseStaticFiles();
