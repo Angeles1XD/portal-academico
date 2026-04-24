@@ -2,27 +2,30 @@
 
 <h2>Lista de Cursos</h2>
 
-<form method="get">
-    <input type="text" name="nombre" placeholder="Buscar por nombre" />
-    <input type="number" name="creditos" placeholder="Créditos" />
-    <button type="submit">Filtrar</button>
-</form>
+<a asp-action="Create" class="btn btn-primary">➕ Nuevo Curso</a>
 
-<table border="1">
-    <tr>
-        <th>Nombre</th>
-        <th>Créditos</th>
-        <th>Acción</th>
-    </tr>
+<br /><br />
 
-@foreach (var item in Model)
-{
-    <tr>
-        <td>@item.Nombre</td>
-        <td>@item.Creditos</td>
-        <td>
-            <a asp-action="Details" asp-route-id="@item.Id">Inscribirse</a>
-        </td>
-    </tr>
-}
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>Nombre</th>
+            <th>Créditos</th>
+            <th>Acción</th>
+        </tr>
+    </thead>
+
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Nombre</td>
+            <td>@item.Creditos</td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Editar</a>
+                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Eliminar</a>
+            </td>
+        </tr>
+    }
+    </tbody>
 </table>

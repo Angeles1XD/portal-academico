@@ -1,25 +1,22 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace PortalAcademico.Models
+namespace PortalAcademico.Models;
+
+public class Curso
 {
-    public class Curso
-    {
-        public int Id { get; set; }
+    public int Id { get; set; }
 
-        [Required]
-        public string Codigo { get; set; } = "";
+    [Required]
+    [MaxLength(100)]
+    public string Nombre { get; set; } = string.Empty;
 
-        [Required]
-        public string Nombre { get; set; } = "";
+    [Required]
+    [MaxLength(20)]
+    public string Codigo { get; set; } = string.Empty;
 
-        public int Creditos { get; set; }
+    [Range(1, 10)]
+    public int Creditos { get; set; }
 
-        public int CupoMaximo { get; set; }
-
-        public DateTime HorarioInicio { get; set; }
-
-        public DateTime HorarioFin { get; set; }
-
-        public bool Activo { get; set; }
-    }
+    // Relación
+    public ICollection<Matricula> Matriculas { get; set; } = new List<Matricula>();
 }

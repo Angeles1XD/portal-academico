@@ -6,16 +6,22 @@ namespace PortalAcademico.Models
     {
         public int Id { get; set; }
 
+        // FK
+        [Required]
         public int CursoId { get; set; }
 
         [Required]
-        public string UsuarioId { get; set; } = "";
+        public string UsuarioId { get; set; } = string.Empty;
 
-        public DateTime FechaRegistro { get; set; }
+        // Fecha automática
+        public DateTime FechaRegistro { get; set; } = DateTime.UtcNow;
 
+        // Estado controlado
         [Required]
-        public string Estado { get; set; } = "";
+        [MaxLength(20)]
+        public string Estado { get; set; } = "Activo";
 
-        public Curso? Curso { get; set; }
+        // Navegación
+        public Curso Curso { get; set; } = null!;
     }
 }

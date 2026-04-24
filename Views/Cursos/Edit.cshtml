@@ -1,8 +1,10 @@
 @model PortalAcademico.Models.Curso
 
-<h2>Crear Curso</h2>
+<h2>Editar Curso</h2>
 
-<form asp-action="Create">
+<form asp-action="Edit">
+    <input type="hidden" asp-for="Id" />
+
     <div class="form-group">
         <label>Nombre</label>
         <input asp-for="Nombre" class="form-control" />
@@ -15,6 +17,6 @@
 
     <br />
 
-    <button type="submit" class="btn btn-success">Guardar</button>
+    <button type="submit" class="btn btn-primary">Guardar</button>
     <a asp-action="Index" class="btn btn-secondary">Volver</a>
 </form>

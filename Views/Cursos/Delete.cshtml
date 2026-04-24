@@ -1,0 +1,18 @@
+@model PortalAcademico.Models.Curso
+
+<h2>Eliminar Curso</h2>
+
+<h4>¿Seguro que deseas eliminar este curso?</h4>
+
+<div>
+    <strong>@Model.Nombre</strong> - @Model.Creditos créditos
+</div>
+
+<form asp-action="Delete">
+    <input type="hidden" asp-for="Id" />
+
+    <br />
+
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+</form>
