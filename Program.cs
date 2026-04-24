@@ -20,6 +20,13 @@ builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
+// 👇 CREAR / ACTUALIZAR BD AQUÍ (ANTES DE TODO)
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    db.Database.Migrate(); // 👈 MEJOR QUE EnsureCreated
+}
+
 // Configuración
 if (!app.Environment.IsDevelopment())
 {
@@ -27,8 +34,10 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
-app.UseStaticFiles(); // 👈 ESTE ES EL CORRECTO EN .NET 8
+// ⚠️ OPCIONAL (Render no usa HTTPS interno)
+// app.UseHttpsRedirection();
+
+app.UseStaticFiles();
 
 app.UseRouting();
 
