@@ -1,0 +1,28 @@
+@model IEnumerable<PortalAcademico.Models.Curso>
+
+<h2>Lista de Cursos</h2>
+
+<form method="get">
+    <input type="text" name="nombre" placeholder="Buscar por nombre" />
+    <input type="number" name="creditos" placeholder="Créditos" />
+    <button type="submit">Filtrar</button>
+</form>
+
+<table border="1">
+    <tr>
+        <th>Nombre</th>
+        <th>Créditos</th>
+        <th>Acción</th>
+    </tr>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>@item.Nombre</td>
+        <td>@item.Creditos</td>
+        <td>
+            <a asp-action="Details" asp-route-id="@item.Id">Inscribirse</a>
+        </td>
+    </tr>
+}
+</table>

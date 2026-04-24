@@ -1,0 +1,29 @@
+@model PortalAcademico.Models.Curso
+
+<h2>Crear Curso</h2>
+
+<form asp-action="Create">
+    <div>
+        Código: <input asp-for="Codigo" />
+    </div>
+    <div>
+        Nombre: <input asp-for="Nombre" />
+    </div>
+    <div>
+        Créditos: <input asp-for="Creditos" />
+    </div>
+    <div>
+        Cupo: <input asp-for="CupoMaximo" />
+    </div>
+    <div>
+        Inicio: <input asp-for="HorarioInicio" type="datetime-local" />
+    </div>
+    <div>
+        Fin: <input asp-for="HorarioFin" type="datetime-local" />
+    </div>
+    <div>
+        Activo: <input asp-for="Activo" type="checkbox" />
+    </div>
+
+    <button type="submit">Guardar</button>
+</form>
